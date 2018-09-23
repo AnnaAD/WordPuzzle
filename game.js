@@ -51,11 +51,24 @@ $(function(){
     if(e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
       return;
     }
+
+    var id = $(this).attr("id");
+    //deal with delete keypress
+    if(e.keyCode == 8 || e.keyCode == 46) {
+      if(mode == "row") {
+        $(this).val("");
+        $("#" + id.slice(0,1) + (parseInt(id.slice(1,2)) - 1)).focus();
+      } else {
+        $(this).val("");
+        var index = letters.indexOf(id.slice(0,1));
+        $("#" + letters.slice(index-1, index) + id.slice(1,2)).focus();
+      }
+    }
     $(this).val("");
   });
 
 
-  //Arraow key focus control
+  //Arrow key focus control
   $(document).keydown(function(e) {
     console.log(e.keyCode);
     var id = $(document.activeElement).attr("id");
@@ -63,6 +76,7 @@ $(function(){
     if(id == undefined) {
       return;
     }
+
 
     //37 left
     //38 up
