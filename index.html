@@ -1,0 +1,77 @@
+<html>
+<head>
+  <title>Word Puzzle</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  <script src = "game.js"></script>
+  <script src = "puzzle.js"></script>
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-sm-4">
+        <table cellspacing="0" cellpadding="0">
+          <tr>
+            <th><input class = "inputBox" id = "a1" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "a2" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "a3" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "a4" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "a5" maxlength = "1"></input></th>
+          </tr>
+          <tr>
+            <th><input class = "inputBox" id = "b1" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "b2" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "b3" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "b4" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "b5" maxlength = "1"></input></th>
+          </tr>
+          <tr>
+            <th><input class = "inputBox" id = "c1" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "c2" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "c3" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "c4" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "c5" maxlength = "1"></input></th>
+          </tr>
+          <tr>
+            <th><input class = "inputBox" id = "d1" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "d2" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "d3" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "d4" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "d5" maxlength = "1"></input></th>
+          </tr>
+          <tr>
+            <th><input class = "inputBox" id = "e1" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "e2" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "e3" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "e4" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "e5" maxlength = "1"></input></th>
+          </tr>
+        </table>
+        
+        <button onclick = "checkWin()">Check</button>
+      </div>
+      <div class = "col-sm-4">
+        <ol id = "acrossClues">
+          <lh>Across</lh>
+          <li id = "aclue1">clue</li>
+          <li id = "aclue2">clue</li>
+          <li id = "aclue3">clue</li>
+          <li id = "aclue4">clue</li>
+          <li id = "aclue5">clue</li>
+        </ol>
+      </div>
+      <div class = "col-sm-4">
+        <ol id = "downClues">
+          <lh>Down</lh>
+          <li id = "dclue1">clue</li>
+          <li id = "dclue2">clue</li>
+          <li id = "dclue3">clue</li>
+          <li id = "dclue4">clue</li>
+          <li id = "dclue5">clue</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
