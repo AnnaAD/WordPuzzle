@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>Word Puzzle</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -9,46 +9,50 @@
   <script src = "game.js"></script>
   <script src = "puzzle.js"></script>
   <div class = "container">
-    <div class = "row">
+    <h1 class = "text-center">So Many 5x5s</h1>
+    <p class = "text-center"> Want more than one NyTimes mini puzzle a day? This is the site for you! </p>
+    <hr>
+    <div class = "mx-auto" id = "timer">0:00</div>
+    <div class = "row my-4">
       <div class = "col-sm-4">
         <table cellspacing="0" cellpadding="0">
           <tr>
-            <th><input class = "inputBox" id = "a1" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "a2" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "a3" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "a4" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "a5" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "11" maxlength = "1"></input><p class = "number">1</p></th>
+            <th><input class = "inputBox" id = "12" maxlength = "1"></input><p class = "number">2</p></th>
+            <th><input class = "inputBox" id = "13" maxlength = "1"></input><p class = "number">3</p></th>
+            <th><input class = "inputBox" id = "14" maxlength = "1"></input><p class = "number">4</p></th>
+            <th><input class = "inputBox" id = "15" maxlength = "1"></input><p class = "number">5</p></th>
           </tr>
           <tr>
-            <th><input class = "inputBox" id = "b1" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "b2" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "b3" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "b4" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "b5" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "21" maxlength = "1"></input><p class = "number">2</p></th>
+            <th><input class = "inputBox" id = "22" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "23" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "24" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "25" maxlength = "1"></input></th>
           </tr>
           <tr>
-            <th><input class = "inputBox" id = "c1" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "c2" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "c3" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "c4" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "c5" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "31" maxlength = "1"></input><p class = "number">3</p></th>
+            <th><input class = "inputBox" id = "32" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "33" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "34" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "35" maxlength = "1"></input></th>
           </tr>
           <tr>
-            <th><input class = "inputBox" id = "d1" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "d2" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "d3" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "d4" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "d5" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "41" maxlength = "1"></input><p class = "number">4</p></th>
+            <th><input class = "inputBox" id = "42" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "43" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "44" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "45" maxlength = "1"></input></th>
           </tr>
           <tr>
-            <th><input class = "inputBox" id = "e1" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "e2" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "e3" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "e4" maxlength = "1"></input></th>
-            <th><input class = "inputBox" id = "e5" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "51" maxlength = "1"></input><p class = "number">5</p></th>
+            <th><input class = "inputBox" id = "52" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "53" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "54" maxlength = "1"></input></th>
+            <th><input class = "inputBox" id = "55" maxlength = "1"></input></th>
           </tr>
         </table>
-        
+
         <button onclick = "checkWin()">Check</button>
       </div>
       <div class = "col-sm-4">
