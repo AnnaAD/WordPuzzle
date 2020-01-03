@@ -9,7 +9,9 @@ input {
 th {
   position: relative;
 }
-li { cursor: pointer; }
+li {
+  cursor: pointer;
+}
 
 .number {
   float: left;
@@ -48,6 +50,11 @@ body, input, li {
 
 input {
   color: transparent;
+  border: 0px;
+}
+
+th {
+ border: 2px solid black;
 }
 
 ol {

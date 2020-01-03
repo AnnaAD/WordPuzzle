@@ -26,14 +26,12 @@ var timer = setInterval(function() {
 
   time = minutes + ":" + seconds;
   $("#timer").text(time);
-  console.log("run");
+  //console.log("run");
 
 },1000);
 
 $(function(){
-  var oldFocus = $("#11");
-  oldFocus.focus();
-  updateHighlights(oldFocus);
+
 
   for(var i = 1; i < 6; i++) {
     $("#aclue" + i).text(puzzle.acrossClues[i-1]);
@@ -43,6 +41,9 @@ $(function(){
     $("#dclue" + i).text(puzzle.downClues[i-1]);
   }
 
+  var oldFocus = $("#11");
+  oldFocus.focus();
+  updateHighlights(oldFocus);
 
   $('input').on('input',function(e){
     content = $('input').val();
@@ -51,7 +52,7 @@ $(function(){
     var id = $(this).attr('id');
 
     var newfocusId;
-    console.log(id);
+    //console.log(id);
     if(mode == "row") {
       newfocusId = incrementRow(id);
     } else if (mode == "column") {
@@ -59,7 +60,7 @@ $(function(){
     }
 
     $("#"+newfocusId).focus();
-    console.log(newfocusId);
+    //console.log(newfocusId);
     oldFocus = $("#"+newfocusId);
   });
 
@@ -77,24 +78,41 @@ $(function(){
       mode = "row";
     }
     oldFocus.focus();
-    updateHighlights(oldFocus);
+    //updateHighlights(oldFocus);
   });
   //Allows for users to easily type over old inputs
   $("input").keydown(function (e) {
-    console.log("keydown");
+    //console.log(e.keyCode);
     if(e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
       return;
     }
+
+
     var id = $(this).attr('id');
-    console.log(id);
-    console.log($(this).val());
+    //console.log(id);
+    //console.log($(this).val());
+
+    if(e.keyCode == 9) {
+      if(mode == "row") {
+        $("#" + (parseInt(id.slice(0,1)) + 1) + id.slice(1,2)).focus();
+        if((parseInt(id.slice(0,1)) + 1) > height) {
+          $("#" + "1" + id.slice(1,2)).focus();
+        }
+      } else {
+        $("#" + id.slice(0,1) + (parseInt(id.slice(1,2)) + 1)).focus();
+        if((parseInt(id.slice(1,2)) + 1) > height) {
+          $("#" + id.slice(0,1) + "1").focus();
+        }
+      }
+      return;
+    }
 
     var delete_next = false;
     if($(this).val() == "") {
       delete_next = true;
     }
 
-    console.log(delete_next);
+    //console.log(delete_next);
 
     $(this).val("");
 
@@ -103,11 +121,13 @@ $(function(){
     if(e.keyCode == 8 || e.keyCode == 46) {
       if(mode == "row") {
         if(delete_next) {
+          //console.log("delete focus");
           $("#" + id.slice(0,1) + (parseInt(id.slice(1,2)) - 1)).focus();
           $("#" + id.slice(0,1) + (parseInt(id.slice(1,2)) - 1)).val("");
         }
       } else {
           if(delete_next) {
+            //console.log("delete focus");
             $("#" + (parseInt(id.slice(0,1)) - 1) + id.slice(1,2)).focus();
             $("#" + (parseInt(id.slice(0,1)) - 1) + id.slice(1,2)).val("");
           }
@@ -116,15 +136,22 @@ $(function(){
   });
 
 
+
   //Arrow key focus control
   $(document).keydown(function(e) {
-    console.log(e.keyCode);
+    //console.log(e.keyCode);
     var id = $(document.activeElement).attr("id");
 
     if(id == undefined) {
       return;
     }
 
+    //stop default TAB key behavior
+    var keycode1 = (e.keyCode ? e.keyCode : e.which);
+    if (keycode1 == 0 || keycode1 == 9) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
 
     //37 left
     //38 up
@@ -178,8 +205,9 @@ $(function(){
     oldFocus = $(this);
   });
 
-  $("input").focus(function(e){
+  $("input").focus(function focusing(e){
     //console.log("1");
+    //console.log("focus: " + $(this).attr('id'));
     updateHighlights($(this));
     //e.stopImmediatePropagation();
   });
@@ -189,7 +217,7 @@ $(function(){
 function updateHighlights(target) {
   clearAllHighlights();
   var targetId = target.attr('id');
-  console.log(targetId);
+  //console.log("highlight: " + targetId);
   if(mode == "row") {
     $("#aclue"+targetId.slice(0,1)).addClass("highlighted");
     highlightRow(targetId.slice(0,1));
@@ -214,7 +242,7 @@ function clearAllHighlights() {
 }
 
 function highlightColumn(col) {
-  for(var i = 1; i <= width; i++) {
+  for(var i = 1; i <= height; i++) {
     var targetId = i + "" + col;
     $("#" + targetId).addClass("highlighted");
   }
