@@ -32,16 +32,71 @@ var timer = setInterval(function() {
 
 $(function(){
 
+  let firstValidId = null;
+  let lastUsedNum = 1;
+  let focusStarts = {};
+  let seenCols = [];
+  for(var i = 0; i < puzzle.grid.length; i++) {
+    var tr = document.createElement("tr");
+    firstRow = true;
+    for(var j = 0; j < puzzle.grid[0].length; j++) {
+      var th = document.createElement("th");
+      if(puzzle.grid[i][j] != "X"){
 
-  for(var i = 1; i < 6; i++) {
-    $("#aclue" + i).text(puzzle.acrossClues[i-1]);
+        var input = document.createElement("input");
+        input.className = "inputBox";
+        input.maxLength = 1;
+        input.id = ""+(i+1) + (j+1)
+        if(firstValidId == null) {
+          firstValidId = input.id;
+        }
+        if(firstRow) {
+          var num = document.createElement("p");
+          num.className = "number";
+          num.innerHTML = lastUsedNum;
+          lastUsedNum +=1;
+          th.append(num);
+          firstRow = false;
+          focusStarts["aclue"+(i+1)] = {"num": num.innerHTML, "id": input.id}
+        }
+        if(seenCols.indexOf(j) == -1) {
+          var num = document.createElement("p");
+          num.className = "number";
+          num.innerHTML = lastUsedNum;
+          lastUsedNum +=1;
+          th.append(num);
+          firstRow = false;
+          focusStarts["dclue"+(j+1)] = {"num": num.innerHTML, "id": input.id}
+          seenCols.push(j);
+        }
+        
+        th.append(input);
+      }
+      tr.appendChild(th);
+    }
+    $("#main-table").append(tr);
+    console.log(tr);
+  }
+  console.log(focusStarts)
+
+
+  for(var i = 0; i < 5; i++) {
+    for(var j = 0; j < 5; j++) {
+      if(puzzle.grid[i][j] == "X"){
+        $("#"+(i+1)+(j+1)).remove();
+      }
+    }
   }
 
   for(var i = 1; i < 6; i++) {
-    $("#dclue" + i).text(puzzle.downClues[i-1]);
+    $("#aclue" + i).text(focusStarts["aclue" + i].num + "." + " " + puzzle.acrossClues[i-1]);
   }
 
-  var oldFocus = $("#11");
+  for(var i = 1; i < 6; i++) {
+    $("#dclue" + i).text(focusStarts["dclue" + i].num + "." + " " +puzzle.downClues[i-1]);
+  }
+
+  var oldFocus = $("#"+firstValidId);
   oldFocus.focus();
   updateHighlights(oldFocus);
 
@@ -69,12 +124,10 @@ $(function(){
 
     var index = id.slice(id.length-1, id.length);
 
-    var oldFocus;
+    var oldFocus = $("#"+focusStarts[id].id);;
     if(id.slice(0,1) === "d") {
-      oldFocus = $("#1"+index);
       mode = "column";
     } else {
-      oldFocus = $("#"+index+"1");
       mode = "row";
     }
     oldFocus.focus();
@@ -215,6 +268,7 @@ $(function(){
 });
 
 function updateHighlights(target) {
+  console.log(target);
   clearAllHighlights();
   var targetId = target.attr('id');
   //console.log("highlight: " + targetId);
@@ -256,7 +310,7 @@ function highlightRow(row) {
 }
 
 function incrementRow(id) {
-  if(parseInt(id.slice(1,2)) == width) {
+  if(parseInt(id.slice(1,2)) == width || puzzle.grid[parseInt(id.slice(0,1))-1][parseInt(id.slice(1,2))] == "X") {
     if(settings.autoNextLine) {
       id = id.slice(0,1) + "1";
       return incrementColumn(id);
@@ -269,7 +323,7 @@ function incrementRow(id) {
 }
 
 function incrementColumn(id) {
-  if(parseInt(id.slice(0,1)) == height) {
+  if(parseInt(id.slice(0,1)) == height || puzzle.grid[parseInt(id.slice(0,1))][parseInt(id.slice(1,2))-1] == "X") {
     if(settings.autoNextLine) {
       id = "1" + id.slice(1,2);
       return incrementRow(id);
@@ -286,7 +340,7 @@ function checkWin() {
   for(var i = 1; i <= height; i++) {
     for(var j = 1; j <= width; j++) {
       var targetId = i + "" + j;
-      if($("#" + targetId).val() != puzzle.grid[i-1][j-1]) {
+      if(puzzle.grid[i-1][j-1] != "X" && $("#" + targetId).val() != puzzle.grid[i-1][j-1]) {
         win = false;
         $("#" + targetId).addClass("incorrect");
       }
