@@ -30,8 +30,8 @@ var timer = setInterval(function() {
 
 },1000);
 
-$(function(){
-
+function playGame(puzzle){
+  console.log("playing", puzzle);
   let firstValidId = null;
   let lastUsedNum = 1;
   let focusStarts = {};
@@ -51,7 +51,7 @@ $(function(){
           firstValidId = input.id;
         }
         if(firstRow) {
-          var num = document.createElement("p");
+          var num = document.createElement("label");
           num.className = "number";
           num.innerHTML = lastUsedNum;
           lastUsedNum +=1;
@@ -60,7 +60,7 @@ $(function(){
           focusStarts["aclue"+(i+1)] = {"num": num.innerHTML, "id": input.id}
         }
         if(seenCols.indexOf(j) == -1) {
-          var num = document.createElement("p");
+          var num = document.createElement("label");
           num.className = "number";
           num.innerHTML = lastUsedNum;
           lastUsedNum +=1;
@@ -78,15 +78,6 @@ $(function(){
     console.log(tr);
   }
   console.log(focusStarts)
-
-
-  for(var i = 0; i < 5; i++) {
-    for(var j = 0; j < 5; j++) {
-      if(puzzle.grid[i][j] == "X"){
-        $("#"+(i+1)+(j+1)).remove();
-      }
-    }
-  }
 
   for(var i = 1; i < 6; i++) {
     $("#aclue" + i).text(focusStarts["aclue" + i].num + "." + " " + puzzle.acrossClues[i-1]);
@@ -259,13 +250,14 @@ $(function(){
   });
 
   $("input").focus(function focusing(e){
+    e.preventDefault();
     //console.log("1");
     //console.log("focus: " + $(this).attr('id'));
     updateHighlights($(this));
     //e.stopImmediatePropagation();
   });
 
-});
+}
 
 function updateHighlights(target) {
   console.log(target);
@@ -340,7 +332,7 @@ function checkWin() {
   for(var i = 1; i <= height; i++) {
     for(var j = 1; j <= width; j++) {
       var targetId = i + "" + j;
-      if(puzzle.grid[i-1][j-1] != "X" && $("#" + targetId).val() != puzzle.grid[i-1][j-1]) {
+      if(puzzle.grid[i-1][j-1] != "X" && $("#" + targetId).val().toLowerCase() != puzzle.grid[i-1][j-1]) {
         win = false;
         $("#" + targetId).addClass("incorrect");
       }
